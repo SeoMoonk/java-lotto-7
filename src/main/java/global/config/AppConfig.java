@@ -34,4 +34,8 @@ public class AppConfig {
     public LottoController getLottoController() {
         return lottoController;
     }
+
+    public StoreController getStoreController() {
+        return storeController;
+    }
 }

@@ -1,7 +1,6 @@
 package lotto.utils;
 
-import global.constants.GlobalErrorCode;
-import global.constants.GlobalStatic;
+import global.utils.GlobalValidator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +11,7 @@ public class LottoValidator {
 
     public static void purchaseAmountValidate(String inputPurchaseAmount) {
         int purchaseAmount = 0;
-        numberInputIntegrationValidate(inputPurchaseAmount);
+        GlobalValidator.numberInputIntegrationValidate(inputPurchaseAmount);
         purchaseAmount = Integer.parseInt(inputPurchaseAmount);
         validateMinimumPurchaseAmount(purchaseAmount);
         validateLottoPurchaseUnit(purchaseAmount);
@@ -22,39 +21,6 @@ public class LottoValidator {
         validateLottoNumberRange(numbers);
         validateLottoNumberCount(numbers);
         validateLottoNumberDuplicate(numbers);
-    }
-
-    private static void numberInputIntegrationValidate(String numberInput) {
-        validateIsNumberInput(numberInput);
-        validateContainsPositiveSign(numberInput);
-        validateContainsNegativeSign(numberInput);
-        validateContainsBlank(numberInput);
-    }
-
-    private static void validateIsNumberInput(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(GlobalErrorCode.INVALID_NUMBER_INPUT.getReason());
-        }
-    }
-
-    private static void validateContainsPositiveSign(String input) {
-        if (input.contains(GlobalStatic.NUMBER_POSITIVE_SIGN)) {
-            throw new IllegalArgumentException(GlobalErrorCode.CANNOT_CONTAINS_POSITIVE_SIGN.getReason());
-        }
-    }
-
-    private static void validateContainsNegativeSign(String input) {
-        if (input.contains(GlobalStatic.NUMBER_NEGATIVE_SIGN)) {
-            throw new IllegalArgumentException(GlobalErrorCode.CANNOT_CONTAINS_NEGATIVE_SIGN.getReason());
-        }
-    }
-
-    private static void validateContainsBlank(String input) {
-        if (input.contains(" ") || input.isBlank()) {
-            throw new IllegalArgumentException(GlobalErrorCode.CANNOT_CONTAINS_BLANK.getReason());
-        }
     }
 
     private static void validateMinimumPurchaseAmount(int purchaseAmount) {
