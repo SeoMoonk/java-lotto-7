@@ -24,7 +24,7 @@ public class LottoController {
             PurchasedLottoResponse purchasedResponse = lottoService.getPurchasedResponse();
             lottoOutputView.printPurchaseHistory(purchasedResponse);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            lottoOutputView.printErrorMsg(e.getMessage());
             tryPurchaseLotto();
         }
     }

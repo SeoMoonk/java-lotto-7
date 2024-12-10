@@ -1,8 +1,12 @@
 package lotto.utils;
 
+import global.constants.GlobalErrorCode;
+import global.constants.GlobalStatic;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.constants.LottoErrorCode;
+import lotto.constants.LottoStatic;
 
 public class LottoValidator {
 
@@ -30,59 +34,59 @@ public class LottoValidator {
     private static void validateIsNumberInput(String input) {
         try {
             Integer.parseInt(input);
-        } catch(NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] : 숫자로 변환할 수 없는 값은 입력될 수 없습니다.");
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(GlobalErrorCode.INVALID_NUMBER_INPUT.getReason());
         }
     }
 
     private static void validateContainsPositiveSign(String input) {
-        if(input.contains("+")) {
-            throw new IllegalArgumentException("[ERROR] : + 기호가 포함된 숫자는 입력될 수 없습니다.");
+        if (input.contains(GlobalStatic.NUMBER_POSITIVE_SIGN)) {
+            throw new IllegalArgumentException(GlobalErrorCode.CANNOT_CONTAINS_POSITIVE_SIGN.getReason());
         }
     }
 
     private static void validateContainsNegativeSign(String input) {
-        if(input.contains("-")) {
-            throw new IllegalArgumentException("[ERROR] : - 기호가 포함된 숫자는 입력될 수 없습니다.");
+        if (input.contains(GlobalStatic.NUMBER_NEGATIVE_SIGN)) {
+            throw new IllegalArgumentException(GlobalErrorCode.CANNOT_CONTAINS_NEGATIVE_SIGN.getReason());
         }
     }
 
     private static void validateContainsBlank(String input) {
-        if(input.contains(" ") || input.isBlank()) {
-            throw new IllegalArgumentException("[ERROR] : 공백이거나 공백이 포함된 숫자는 입력할 수 없습니다.");
+        if (input.contains(" ") || input.isBlank()) {
+            throw new IllegalArgumentException(GlobalErrorCode.CANNOT_CONTAINS_BLANK.getReason());
         }
     }
 
     private static void validateMinimumPurchaseAmount(int purchaseAmount) {
-        if(purchaseAmount < 1000) {
-            throw new IllegalArgumentException("[ERROR] : 로또 최소 구입 금액은 1000원 입니다.");
+        if (purchaseAmount < LottoStatic.LOTTO_UNIT_PRICE) {
+            throw new IllegalArgumentException(LottoErrorCode.MINIMUM_PURCHASE_AMOUNT_ERROR.getReason());
         }
     }
 
     private static void validateLottoPurchaseUnit(int purchaseAmount) {
-        if(purchaseAmount % 1000 != 0) {
-            throw new IllegalArgumentException("[ERROR] : 로또는 1000원 단위로만 구매할 수 있습니다.");
+        if (purchaseAmount % LottoStatic.LOTTO_UNIT_PRICE != 0) {
+            throw new IllegalArgumentException(LottoErrorCode.INVALID_LOTTO_PURCHASE_UNIT.getReason());
         }
     }
 
     private static void validateLottoNumberRange(List<Integer> numbers) {
-        for(int number : numbers) {
-            if(number < 1 || number > 45) {
-                throw new IllegalArgumentException("[ERROR] : 로또 번호는 1과 45 사이의 숫자로 구성되어야 합니다.");
+        for (int number : numbers) {
+            if (number < LottoStatic.LOTTO_RANGE_START_NUMBER || number > LottoStatic.LOTTO_RANGE_END_NUMBER) {
+                throw new IllegalArgumentException(LottoErrorCode.INVALID_LOTTO_NUMBER_RANGE.getReason());
             }
         }
     }
 
     private static void validateLottoNumberCount(List<Integer> numbers) {
-        if(numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] : 로또는 6개의 숫자로 구성되어야 합니다.");
+        if (numbers.size() != LottoStatic.LOTTO_NUMBERS_COUNT) {
+            throw new IllegalArgumentException(LottoErrorCode.INVALID_LOTTO_NUMBER_COUNT.getReason());
         }
     }
 
     private static void validateLottoNumberDuplicate(List<Integer> numbers) {
         Set<Integer> numberTemp = new HashSet<>(numbers);
-        if(numberTemp.size() != numbers.size()) {
-            throw new IllegalArgumentException("[ERROR] : 로또 번호에 중복된 번호가 포함되어 있습니다.");
+        if (numberTemp.size() != numbers.size()) {
+            throw new IllegalArgumentException(LottoErrorCode.LOTTO_NUMBERS_CONTAINS_DUPLICATE.getReason());
         }
     }
 }
