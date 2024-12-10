@@ -3,6 +3,7 @@ package store.controller;
 import global.view.InputView;
 import global.view.OutputView;
 import java.util.List;
+import store.dto.response.FinalAwardsResponse;
 import store.service.StoreService;
 
 public class StoreController {
@@ -16,6 +17,11 @@ public class StoreController {
     public void decideWeeklyLottoNumbers() {
         selectWeeklyNumbers();
         selectBonusNumber();
+    }
+
+    public void finalAward() {
+        FinalAwardsResponse finalAwardsResponse = storeService.finalAward();
+        OutputView.printFinalResult(finalAwardsResponse);
     }
 
     private void selectWeeklyNumbers() {

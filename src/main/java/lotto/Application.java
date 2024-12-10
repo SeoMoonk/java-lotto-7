@@ -12,5 +12,6 @@ public class Application {
 
         lottoController.tryPurchaseLotto();
         storeController.decideWeeklyLottoNumbers();
+        storeController.finalAward();
     }
 }

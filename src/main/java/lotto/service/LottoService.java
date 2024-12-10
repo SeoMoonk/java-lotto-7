@@ -44,4 +44,8 @@ public class LottoService {
         List<Lotto> purchasedLottos = lottoRepository.findAll();
         return new PurchasedLottoResponse(purchasedLottos.size(), purchasedLottos);
     }
+
+    public List<Lotto> getAll() {
+        return lottoRepository.findAll();
+    }
 }

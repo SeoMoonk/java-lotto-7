@@ -27,7 +27,7 @@ public class AppConfig {
         lottoService = new LottoService(lottoRepository);
         lottoController = new LottoController(lottoService);
         storeRepository = new StoreRepositoryImpl();
-        storeService = new StoreService(storeRepository);
+        storeService = new StoreService(lottoService, storeRepository);
         storeController = new StoreController(storeService);
     }
 
