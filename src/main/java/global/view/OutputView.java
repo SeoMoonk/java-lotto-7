@@ -1,13 +1,13 @@
-package lotto.view;
+package global.view;
 
 import global.constants.GlobalStatic;
 import lotto.constants.LottoInfoMsg;
 import lotto.dto.response.PurchasedLottoResponse;
 import lotto.entity.Lotto;
 
-public class LottoOutputView {
+public class OutputView {
 
-    public void printPurchaseHistory(PurchasedLottoResponse response) {
+    public static void printPurchaseHistory(PurchasedLottoResponse response) {
         StringBuilder sb = new StringBuilder();
         sb.append(LottoInfoMsg.LOTTO_PURCHASE_RESULT_MSG.getMsg().formatted(response.count())).append("\n");
         for(Lotto lotto : response.purchasedLottos()) {
@@ -16,7 +16,7 @@ public class LottoOutputView {
         System.out.println(sb.toString());
     }
 
-    public void printErrorMsg(String reason){
+    public static void printErrorMsg(String reason){
         System.out.println(GlobalStatic.ERROR_MSG_PREFIX + reason);
     }
 }
