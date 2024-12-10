@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.dto.response.PurchasedLottoResponse;
 import lotto.service.LottoService;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
@@ -14,5 +15,12 @@ public class LottoController {
         this.lottoInputView = lottoInputView;
         this.lottoOutputView = lottoOutputView;
         this.lottoService = lottoService;
+    }
+
+    public void tryPurchaseLotto() {
+        String purchaseAmount = lottoInputView.inputPurchaseAmount();
+        lottoService.purchaseLottos(purchaseAmount);
+        PurchasedLottoResponse purchasedResponse = lottoService.getPurchasedResponse();
+        lottoOutputView.printPurchaseHistory(purchasedResponse);
     }
 }
