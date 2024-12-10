@@ -18,9 +18,14 @@ public class LottoController {
     }
 
     public void tryPurchaseLotto() {
-        String purchaseAmount = lottoInputView.inputPurchaseAmount();
-        lottoService.purchaseLottos(purchaseAmount);
-        PurchasedLottoResponse purchasedResponse = lottoService.getPurchasedResponse();
-        lottoOutputView.printPurchaseHistory(purchasedResponse);
+        try {
+            String purchaseAmount = lottoInputView.inputPurchaseAmount();
+            lottoService.purchaseLottos(purchaseAmount);
+            PurchasedLottoResponse purchasedResponse = lottoService.getPurchasedResponse();
+            lottoOutputView.printPurchaseHistory(purchasedResponse);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            tryPurchaseLotto();
+        }
     }
 }
